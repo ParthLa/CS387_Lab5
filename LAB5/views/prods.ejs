@@ -8,31 +8,30 @@
 
 <main>
     <div class="grid">
+        <% for (var i = 0; i < products.length; i++) { %>
+        <% var product = products[i]; %>
     <article class="card product-item">
                     <header class="card__header">
                         <h1 class="product__title">
-                            apple
+                            <%= product.title %>
                         </h1>
                     </header>
                     <div class="card__image">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0p163XEZnrJUsZ0ktcvzjwHaE8%26pid%3DApi&amp;f=1 " height="150px"   alt="apple">
+                        <img src="<%= product.image %>" height="150px"   alt="<%= product.title %>">
                     </div>
                     <div class="card__content">
                         <h3 class="product__price">Price:
-                            50
+                            <%= product.price %>
                         </h3>
                         <h3 class="product__description">Quantity:
-                            0
+                            <%= product.quantity %>
                         </h3>
                     </div>
                     <div class="card__actions">
-
-                        <form action="/cart" method="post">
-            <button class="btn" type="submit">Add to Cart</button>
-        <input type="hidden" name="product_id" value="7">
-            </form>
+                        <%- include('./includes/add-to-cart.ejs', {product: product}) %>
         </div>
     </article>
+        <% } %>
     </div>
 </main>
 <%- include('../includes/end.ejs') %>
