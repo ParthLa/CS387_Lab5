@@ -26,3 +26,10 @@ exports.post_test = (req,res,next) => {
         })
         .catch(err => console.log(err));
 };
+
+exports.get_products = (req,res,next) => {
+    console.log("inside\n");
+    const prod = new Prod(0,0,0,0);
+    console.log(Prod.get_all());
+       res.render('admin/add_product', {});
+};
