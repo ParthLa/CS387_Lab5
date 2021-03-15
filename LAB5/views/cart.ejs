@@ -7,8 +7,7 @@
 <%- include('./includes/navigation.ejs') %>
 
 <main>
-	<% var output = credits; %>
-    <h1> Credits available: output</h1>
+    <h1> Credits Available: <%= credits%> </h1>
     <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Buy<% } %></button>
     <div class="grid">
         <% for (var i = 0; i < carts.length; i++) { %>
