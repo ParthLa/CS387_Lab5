@@ -22,7 +22,7 @@ exports.post_test = (req,res,next) => {
     const image = req.body.image
     const price = req.body.price;
     const quantity = req.body.quantity;
-    const product = new Cart( item_id,quantity);
+    const product = new Cart(price, item_id, quantity);
     product
         .add_to_cart()
         .then(() => {
