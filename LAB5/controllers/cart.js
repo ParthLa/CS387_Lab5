@@ -5,16 +5,19 @@ exports.get_test = (req,res,next) => {
 
     var carts = Cart.get_all();
     var credits = Cart.get_cred();
-    
+
+    credits.then((credits) => {
+        console.log(credits.rows)
         carts.then((result) => {
             res.render('cart', {
             pageTitle: 'All Products',
             path: '/cart',
             editing: false,
-            carts: result.rows
+            carts: result.rows,
+            credits: credits.rows[0].credit
     });
-});
-
+})});
+    //console.log(credits);
 
 };
 
