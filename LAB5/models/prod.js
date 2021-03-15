@@ -1,4 +1,3 @@
-
 const pool= require('../utils/database');
 module.exports = class Prod{
 
@@ -16,7 +15,13 @@ module.exports = class Prod{
         return pool.query('SELECT * FROM products');
 
     }
-    reduce_quantity(item_id){
+
+    static get_info(item_id){
+        return pool.query('SELECT title, price, image, quantity FROM products where id = $1;', [item_id]);
+
+    }
+
+    static reduce_quantity(item_id){
         return pool.query('UPDATE products set quantity = quantity -1 where id = $1;', [item_id]);
     }
     // take prod_id, quantity -- 
