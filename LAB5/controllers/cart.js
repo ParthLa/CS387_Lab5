@@ -25,23 +25,21 @@ exports.post_test = (req,res,next) => {
 
     const cart_prod = new Cart(1, product_id);
 
-    const info = Prod.get_info(product_id)
-    .then(() => {
-        console.log(info);
-    });
+    const info = Prod.get_info(product_id);
 
+    console.log(info);
+  
     //const prod = new Prod(info.title, info.image, info.price, info.quantity);
     //console.log(info);
 
      	if(info.quantity > 0){
-     		Prod.reduce_quantity(product_id)
+     		Prod.reduce_quantity(product_id);
      		//cart_prod.inc_quantity()
-            cart_prod
-            .add_to_cart()
-            .then(() => {
-             	res.redirect('/cart');
-         	})
-         	.catch(err => console.log(err));
+            cart_prod.add_to_cart();
+            
+            res.redirect('/cart');
+         	
+            //.catch(err => console.log(err));
      	}
      	else{
      		//cart_prod
