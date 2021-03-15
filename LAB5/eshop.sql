@@ -76,7 +76,7 @@ mobile	https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.
 --
 
 COPY public.users (user_id, name, password, email, credit) FROM stdin;
-1	admin	password	email@gmail.com	50000000
+1	admin	password	email@gmail.com	46000000
 \.
 
 

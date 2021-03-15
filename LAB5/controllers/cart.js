@@ -1,4 +1,4 @@
-const Prod = require('../models/prod');
+const Prod = require('../models/prods');
 const Cart = require('../models/cart');
 
 exports.get_test = (req,res,next) => {
@@ -22,21 +22,22 @@ exports.get_test = (req,res,next) => {
 exports.post_test = (req,res,next) => {
      
     const product_id = req.body.product_id;
-
-    const cart_prod = new Cart(1, product_id);
+    var user_id = 1;
+    const cart_prod = new Cart(user_id, product_id);
 
     const info = Prod.get_info(product_id)
-    .then(() => {
-        console.log(info);
+    info.then(() => {
+    	console.log("Hi");
+        console.log(info.quantity);
     });
 
     //const prod = new Prod(info.title, info.image, info.price, info.quantity);
-    //console.log(info);
+    // console.log(info);
 
      	if(info.quantity > 0){
      		Prod.reduce_quantity(product_id)
      		//cart_prod.inc_quantity()
-            cart_prod
+            // cart_prod
             .add_to_cart()
             .then(() => {
              	res.redirect('/cart');
@@ -51,5 +52,10 @@ exports.post_test = (req,res,next) => {
          	//})
          	//.catch(err => console.log(err));
      	}
-
+     	// cart_prod
+     	// 		.add_to_cart()
+     	// 		.then(() => {
+      //       		res.redirect('/cart');
+      //   		})
+      //   		.catch(err => console.log(err));
  };

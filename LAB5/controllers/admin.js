@@ -1,4 +1,4 @@
-const Prod = require('../models/prod');
+const Prod = require('../models/prods');
 
 
 exports.get_test = (req,res,next) => {
