@@ -17,12 +17,12 @@ module.exports = class Cart{
         return pool.query('INSERT INTO cart(user_id, item_id, quantity) VALUES ($1, $2, $3);', [this.user_id, this.item_id, this.quantity]);
     }
     static get_all(){
-        return pool.query('SELECT credit, title, image, price, cart.quantity as qty FROM users, cart, products where cart.item_id = products.id and users.user_id = cart.user_id');
+        return pool.query('SELECT title, image, price, cart.quantity as qty FROM cart, products where cart.item_id = products.id;');
     }
     inc_quantity(){
         return pool.query('INSERT INTO cart(user_id, item_id, quantity) VALUES ($1, $2, $3);', [this.user_id, this.item_id, 1]);
     }
     static get_cred(){
-        return pool.query('SELECT credit FROM users where users.user_id = $1;',[this.user_id]);
+        return pool.query('SELECT credit FROM users where users.user_id = 1;');
     }
 };
