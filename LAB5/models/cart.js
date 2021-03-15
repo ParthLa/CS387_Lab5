@@ -1,10 +1,10 @@
 const pool= require('../utils/database');
 module.exports = class Cart{
 
-    constructor( item_id, quantity){
+    constructor(price, item_id, quantity){
         // this.title = title;
         // this.image = image;
-        // this.price = price;
+        this.price = price;
         this.user_id = 1;
         this.item_id = item_id;
         this.quantity = quantity; 
