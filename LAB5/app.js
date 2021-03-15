@@ -11,7 +11,7 @@ const app = express();
 
 const mainRo = express.Router();
 const prodCon = require('./controllers/prods')
-//const cartCon = require('./controllers/cart')
+const cartCon = require('./controllers/cart')
 //const orderCon = require('./controllers/order')
 
 app.set('view engine', 'ejs');
@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 
 mainRo.get('/prods', prodCon.get_test);
-//mainRo.get('/cart', cartCon.get_test);
-//mainRo.post('/cart', cartCon.post_test);
+mainRo.get('/cart', cartCon.get_test);
+mainRo.post('/cart', cartCon.post_test);
 //mainRo.get('/orders', orderCon.get_test);
 //mainRo.post('/orders', orderCon.post_test);
 
