@@ -16,5 +16,8 @@ module.exports = class Prod{
         return pool.query('SELECT * FROM products');
 
     }
-
+    reduce_quantity(item_id){
+        return pool.query('UPDATE products set quantity = quantity -1 where id = $1;', [item_id]);
+    }
+    // take prod_id, quantity -- 
 };

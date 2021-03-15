@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 mainRo.get('/prods', prodCon.get_test);
 mainRo.get('/cart', cartCon.get_test);
-mainRo.post('/cart', cartCon.post_test);
+// mainRo.post('/cart', cartCon.post_test);
 //mainRo.get('/orders', orderCon.get_test);
 //mainRo.post('/orders', orderCon.post_test);
 
