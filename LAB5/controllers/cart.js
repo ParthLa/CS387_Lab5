@@ -1,5 +1,7 @@
-const Prod = require('../models/prods');
+const Prod = require('../models/prod');
+const User = require('../models/user');
 const Cart = require('../models/cart');
+const Order = require('../models/order')
 
 exports.get_test = (req,res,next) => {
 
@@ -21,34 +23,60 @@ exports.get_test = (req,res,next) => {
 
 exports.post_test = (req,res,next) => {
      
-    const product_id = req.body.product_id;
-    var user_id = 1;
-    const cart_prod = new Cart(user_id, product_id);
+    Cart
+        .get_all()
+        .then((value) => {
+            const cartRows = value.rows;
+            var cartAmount = 0;
+            for (i = 0; i < cartRows.length; i++) { 
+                cartAmount += (cartRows[i]["quantity"] * cartRows[i]["price"]); 
+            }
+
+            const user = new User(1);
+            user
+                .get_creds()
+                .then((credit) => {
+                    if(cartAmount > credit){
+                        res.redirect('/cart');
+                        return;
+                    }
+                })
+                .catch(err => console.log(err));
+
+            user.reduce_creds(cartAmount);
+
+            for (i = 0; i < cartRows.length; i++) { 
+                const order = new Order(user_id, cartRows[i]["item_id"], cartRows[index]["quantity"]);
+                order
+                    .addToOrders()
+                    .then(() => {
+                        res.redirect('/order');
+                    })
+                    .catch(err => console.log(err));
+            }
+
+        })
+        .catch(err => console.log(err));
+
+        Cart.delete_all();
 
 
-    const info = Prod.get_info(product_id)
-    info.then(() => {
-    	console.log("Hi");
-        console.log(info.quantity);
-    });
-
-    // const info = Prod.get_info(product_id);
 
 
+
+
+     
+    /*const product_id = req.body.product_id;
+    const cart_prod = new Cart(1, product_id);
+    const info = Prod.get_info(product_id);
     console.log(info);
   
     //const prod = new Prod(info.title, info.image, info.price, info.quantity);
-    // console.log(info);
+    //console.log(info);
 
      	if(info.quantity > 0){
      		Prod.reduce_quantity(product_id);
      		//cart_prod.inc_quantity()
-            // cart_prod
-          //   .add_to_cart()
-          //   .then(() => {
-          //    	res.redirect('/cart');
-         	// })
-         	// .catch(err => console.log(err));
             cart_prod.add_to_cart();
             
             res.redirect('/cart');
@@ -63,10 +91,5 @@ exports.post_test = (req,res,next) => {
          	//})
          	//.catch(err => console.log(err));
      	}
-     	// cart_prod
-     	// 		.add_to_cart()
-     	// 		.then(() => {
-      //       		res.redirect('/cart');
-      //   		})
-      //   		.catch(err => console.log(err));
+*/
  };
