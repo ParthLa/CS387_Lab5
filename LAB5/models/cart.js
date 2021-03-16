@@ -30,7 +30,7 @@ module.exports = class Cart{
     
     }
     static get_all(){
-        return pool.query('SELECT user_id, item_id, title, image, price, cart.quantity FROM cart, products where cart.item_id = products.id;');
+        return pool.query('SELECT user_id, item_id, title, image, price, cart.quantity as qty FROM cart, products where cart.item_id = products.id;');
     }
     inc_quantity(){
         return pool.query('UPDATE cart set quantity = quantity + 1 where item_id = $2 and user_id = $1;', [this.user_id, this.item_id]);
