@@ -1,7 +1,7 @@
 const Prod = require('../models/prod');
 const User = require('../models/user');
 const Cart = require('../models/cart');
-const Order = require('../models/order')
+const Order = require('../models/orders')
 
 exports.get_test = (req,res,next) => {
 
@@ -23,7 +23,7 @@ exports.get_test = (req,res,next) => {
 
 exports.post_test = (req,res,next) => {
      
-    Cart
+    /*Cart
         .get_all()
         .then((value) => {
             const cartRows = value.rows;
@@ -50,7 +50,7 @@ exports.post_test = (req,res,next) => {
                 order
                     .addToOrders()
                     .then(() => {
-                        res.redirect('/order');
+                        res.redirect('/orders');
                     })
                     .catch(err => console.log(err));
             }
@@ -58,38 +58,32 @@ exports.post_test = (req,res,next) => {
         })
         .catch(err => console.log(err));
 
-        Cart.delete_all();
+        Cart.delete_all();*/
 
+        const product_id = req.body.product_id;
+        const qty = req.body.quantity;
+        // var user_id = 1;
+        /*const info = Prod.get_info(product_id).then(() =>
+        {
+            console.log(info);
 
+        });*/
 
-
-
-
+        if(qty <= 0){
+            console.log("Hi");
+            res.redirect('/prods');
+            return;
+        }
+        else{
+            const cart_prod = new Cart(1, product_id);
+            Prod.reduce_quantity(product_id);
+            cart_prod
+                .add_to_cart()
+                .then(() => {
+                     res.redirect('/cart');
+                 })
+                 .catch(err => console.log(err));
+        }
      
-    /*const product_id = req.body.product_id;
-    const cart_prod = new Cart(1, product_id);
-    const info = Prod.get_info(product_id);
-    console.log(info);
-  
-    //const prod = new Prod(info.title, info.image, info.price, info.quantity);
-    //console.log(info);
-
-     	if(info.quantity > 0){
-     		Prod.reduce_quantity(product_id);
-     		//cart_prod.inc_quantity()
-            cart_prod.add_to_cart();
-            
-            res.redirect('/cart');
-         	
-            //.catch(err => console.log(err));
-     	}
-     	else{
-     		//cart_prod
-    
-            //.then(() => {
-             	res.redirect('/prods');
-         	//})
-         	//.catch(err => console.log(err));
-     	}
-*/
+   
  };
