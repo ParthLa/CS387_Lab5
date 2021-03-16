@@ -1,12 +1,14 @@
 const path = require('path');
 const express = require('express');
 
-const adminCon = require('../controllers/cart');
+const cartCon = require('../controllers/cart');
 
 const router = express.Router();
 
 
-router.get('/cart',adminCon.get_test);
-router.post('/cart',adminCon.post_test);
+router.get('/',cartCon.get_test);
+router.post('/',cartCon.post_test);
+
+
 
 module.exports = router;
