@@ -1,20 +1,18 @@
-const Prod = require('../models/prods');
+const Prod = require('../models/prod');
 const Cart = require('../models/cart');
 
 
 exports.get_test = (req,res,next) => {
 
     var products = Prod.get_all();
-        products
-        	.then((result) => {
-            	res.render('prods', {
-   		         	pageTitle: 'All Products',
-        	    	path: '/prods',
-        	    	editing: false,
-            		products: result.rows
-    			});
-			});
-			// .catch(err => console.log(err));	
+        products.then((result) => {
+            res.render('prods', {
+            pageTitle: 'All Products',
+            path: '/prods',
+            editing: false,
+            products: result.rows
+    });
+});
 
 };
 
