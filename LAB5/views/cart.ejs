@@ -8,7 +8,11 @@
 
 <main>
     <h1> Credits Available: <%= credits%> </h1>
-    <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Buy<% } %></button>
+    <form action="http://localhost:3000/orders" method="post">
+        <button class="btn" type="submit">Buy</button>
+        <input type="hidden" name="carts">
+    </form>
+
     <div class="grid">
         <% for (var i = 0; i < carts.length; i++) { %>
         <% var cart = carts[i]; %>
