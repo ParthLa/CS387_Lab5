@@ -1,23 +1,32 @@
-// const Prod = require('../models/prod');
-const Cart = require('../models/cart');
+const Prod = require('../models/prod');
 const User = require('../models/user');
+const Cart = require('../models/cart');
 const Orders = require('../models/orders')
 
 
 exports.get_test = (req,res,next) => {
 
-    Orders
-        .get_all()
-        .then((value) => {
-            res.render('orders', {
-                pageTitle: 'Orders',
-                path: '/orders',
-                editing: false,
-                orders: value.rows
-            });
-        })
-        .catch(err => console.log(err));
+    // Orders
+    //     .get_all()
+    //     .then((value) => {
+    //         res.render('orders', {
+    //             pageTitle: 'Orders',
+    //             path: '/orders',
+    //             editing: false,
+    //             orders: value.rows
+    //         });
+    //     })
+    //     .catch(err => console.log(err));
 
+    var orders = Orders.get_all();
+    orders.then((value) =>{
+        res.render('orders', {
+            pageTitle: 'Orders',
+            path: '/orders',
+            editing: false,
+            orders: value.rows
+        });
+    })
     
 };
 
