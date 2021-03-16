@@ -1,6 +1,6 @@
 
 const pool= require('../utils/database');
-module.exports = class Order{
+module.exports = class Orders{
 
     constructor(user_id, item_id, quantity){
         this.item_id = item_id;
@@ -8,7 +8,7 @@ module.exports = class Order{
         this.quantity = quantity;
     }
 
-    addToOrders(){
+    add_to_orders(){
         pool
             .query('SELECT quantity FROM orders WHERE user_id = $2 and item_id = $1;', [this.item_id, this.user_id])
             .then((value) => {
@@ -26,7 +26,7 @@ module.exports = class Order{
         return Promise.resolve(0);
     }
     static get_all(){
-        return pool.query('SELECT user_id, item_id, orders.quantity, title, image, price FROM orders, products where id = item_id;');
+        return pool.query('SELECT user_id, item_id, orders.quantity as qty, title, image, price FROM orders, products where id = item_id;');
     }
 
 };
