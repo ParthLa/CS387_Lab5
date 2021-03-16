@@ -18,7 +18,7 @@ exports.get_test = (req,res,next) => {
 
 exports.post_test = (req,res,next) => {
      
-    const product_id = req.body.product_id;
+    /*const product_id = req.body.product_id;
     const qty = req.body.quantity;
     // var user_id = 1;
     if(qty <= 0){
@@ -36,14 +36,14 @@ exports.post_test = (req,res,next) => {
          	})
          	.catch(err => console.log(err));
     }
-    // const cart_prod = new Cart(1, product_id);
+    const cart_prod = new Cart(1, product_id);*/
 
-    // const info = Prod.get_info(product_id);
-    // info.then(() => {
-    // 	console.log("Hi");
-    //     console.log(info.quantity);
-    // });
-
+  /*  const info = Prod.get_info(product_id);
+    info.then(() => {
+    	console.log("Hi");
+        console.log(info.quantity);
+    });
+*/
     //const prod = new Prod(info.title, info.image, info.price, info.quantity);
     // console.log(info);
     	// if(qty > 0){
