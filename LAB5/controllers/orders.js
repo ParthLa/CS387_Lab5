@@ -39,7 +39,7 @@ exports.post_test = (req,res,next) => {
         .then((value) => {
             const carts = value.rows;
             var cartAmount = 0;
-            for (i = 0; i < carts.length; i++) { 
+            for (i = 0; i < carts.length; i++) { // use query
                 cartAmount += (carts[i]["quantity"] * carts[i]["price"]); 
             }
 
@@ -51,20 +51,43 @@ exports.post_test = (req,res,next) => {
                         res.redirect('/cart');
                         return;
                     }
+                    else{
+                        user.reduce_creds(cartAmount)
+                        // .then((Orders)=>{
+                        //    for (i = 0; i < carts.length; i++) { 
+                        //     const order = new Orders(user_id, carts[i]["item_id"], carts[i]["quantity"]);
+                        //     order
+                        //         .add_to_orders()
+                        //         .then(() => {
+                        //             res.redirect('/orders');
+                        //         })
+                        //         .catch(err => console.log(err));
+                        //     } 
+                        // })
+                        for (i = 0; i < carts.length; i++) { 
+                            const order = new Orders(user_id, carts[i]["item_id"], carts[i]["quantity"]);
+                            order
+                                .add_to_orders()
+                                .then(() => {
+                                    res.redirect('/orders');
+                                })
+                                .catch(err => console.log(err));
+                        }
+                    }
                 })
                 .catch(err => console.log(err));
 
-            user.reduce_creds(cartAmount);
+            // user.reduce_creds(cartAmount);
 
-            for (i = 0; i < carts.length; i++) { 
-                const order = new Orders(user_id, carts[i]["item_id"], carts[i]["quantity"]);
-                order
-                    .add_to_orders()
-                    .then(() => {
-                        res.redirect('/orders');
-                    })
-                    .catch(err => console.log(err));
-            }
+            // for (i = 0; i < carts.length; i++) { 
+            //     const order = new Orders(user_id, carts[i]["item_id"], carts[i]["quantity"]);
+            //     order
+            //         .add_to_orders()
+            //         .then(() => {
+            //             res.redirect('/orders');
+            //         })
+            //         .catch(err => console.log(err));
+            // }
 
         })
         .catch(err => console.log(err));
